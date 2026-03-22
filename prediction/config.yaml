@@ -1,0 +1,119 @@
+# =========================
+# Experiment metadata
+# =========================
+experiment:
+  name: "dropout_prediction_mcrni"
+  seed: 57
+  description: "Compare ML models using CV probabilities and MCRNI"
+
+# =========================
+# Data settings
+# =========================
+data:
+  raw_path: "/Users/shimengdai/Dropbox/Michigan State/Papers/MCRNI/prediction/data/dropout_df_raw.csv"
+
+
+  outcome: "dropout"
+  school_id_col: "School_ID"
+  drop_columns: ["Unnamed: 0"]
+  drop_missing_outcome: true
+
+  min_school_size: 2
+  test_size: 0.3
+  seed: 57
+
+
+# =========================
+# Feature definitions
+# =========================
+
+feature:
+  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score", "attendance"]
+
+# =========================
+# Missing data handling
+# =========================
+missing:
+  strategy: "impute"      # "impute" | "drop"
+  imputer:
+    method: "median"      # "median" | "mean" | "most_frequent"
+
+# =========================
+# Models to run
+# =========================
+
+models:
+  logistic_regression:
+    params:
+      solver: "liblinear"
+      max_iter: 1000
+    param_grid:
+      penalty: ["l1", "l2"]
+      C: [0.1, 1.0]
+
+  random_forest:
+    params:
+      n_jobs: -1
+      random_state: 57
+    param_grid:
+      n_estimators: [200, 300]
+      min_samples_leaf: [1, 5]
+      max_depth: [null, 10]
+
+  svm:
+    params:
+      kernel: "rbf"
+      probability: true
+      class_weight: "balanced"
+      #random_state: 57
+    param_grid:
+      C: [0.1, 1.0]
+      gamma: ["scale", "auto"]
+
+# =========================
+# Cross-validation
+# =========================
+cv:
+  strategy: "kfold"   # options: kfold, stratified, group_kfold
+  n_splits: 10
+  #group_column: "urbanicity"
+  scoring: "average_precision"
+  n_jobs: -1
+
+# =========================
+# Run control 
+# =========================
+run:
+  models: ["logistic_regression", "random_forest", "svm"] # ["random_forest"]
+  pick_best_by: "roc_auc"
+
+
+# =========================
+# Prediction (standalone script)
+# =========================
+predict:
+  enabled: true
+
+  input_path: "/Users/shimengdai/Dropbox/Michigan State/Papers/MCRNI/prediction/data/splits/df_test.csv"
+
+
+  output_path: "output/predictions/predictions_wide.csv"
+
+  models_dir: "data/models_without2"
+
+  models:
+    - name: "logistic_regression"
+      file: "logistic_regression_best.joblib"
+      out_col: "pred_logreg_proba"
+      type: "proba"
+
+    - name: "random_forest"
+      file: "random_forest_best.joblib"
+      out_col: "pred_rf_proba"
+      type: "proba"
+
+    - name: "svm"
+      file: "svm_best.joblib"
+      out_col: "pred_svm_proba"
+      type: "proba"
+
