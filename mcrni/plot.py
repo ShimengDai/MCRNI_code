@@ -45,15 +45,13 @@ def init_mcrni_plot(mcrni_arr, auc_grid, label=None):
 
     fig, ax = plt.subplots()
 
-    if label is None:
-        label = "Model 1"
-
     ax.plot(auc_grid, mcrni_arr, label=label)
 
     ax.set_xlabel("AUC Threshold (a)")
     ax.set_ylabel("MCRNI")
     ax.set_title("MCRNI Robustness Curves")
     ax.grid(True)
+    ax.legend()
 
     return fig, ax
 
