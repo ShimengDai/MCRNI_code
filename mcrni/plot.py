@@ -77,6 +77,7 @@ def add_mcrni_curve(ax, mcrni_arr, auc_grid, label=None):
         label = f"Model {len(ax.lines) + 1}"
 
     ax.plot(auc_grid, mcrni_arr, label=label)
+    ax.legend()
 
 
 def show_mcrni_plot(self):
