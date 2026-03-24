@@ -56,28 +56,27 @@ def init_mcrni_plot(mcrni_arr, auc_grid, label=None):
     return fig, ax
 
 
-def add_mcrni_curve(self, other_model, label=None):
+def add_mcrni_curve(ax, mcrni_arr, auc_grid, label=None):
     """
-    Add another MCRNI curve from a different model.
+    Add a new MCRNI curve using a precomputed array.
 
     Parameters:
-    - other_model: another MCRNI instance
+    - ax: matplotlib axis
+    - mcrni_arr: numpy array (y-axis)
+    - auc_grid: numpy array (x-axis)
     - label: optional label
     """
 
-    if not hasattr(self, "_ax"):
-        raise ValueError("Call init_mcrni_plot() first.")
+    auc_grid = np.asarray(auc_grid)
 
-    if not isinstance(other_model, MCRNI):
-        raise ValueError("Input must be an MCRNI instance.")
-
-    # Compute curve using SAME auc grid
-    mcrni_arr = other_model.compute_mcrni_array(self._auc_grid)
+    # Safety check
+    if len(mcrni_arr) != len(auc_grid):
+        raise ValueError("mcrni_arr and auc_grid must have the same length.")
 
     if label is None:
-        label = getattr(other_model, "name", f"Model {len(self._ax.lines) + 1}")
+        label = f"Model {len(ax.lines) + 1}"
 
-    self._ax.plot(self._auc_grid, mcrni_arr, marker="o", label=label)
+    ax.plot(auc_grid, mcrni_arr, label=label)
 
 
 def show_mcrni_plot(self):
