@@ -49,7 +49,7 @@ def init_mcrni_plot(mcrni_arr, auc_grid, label=None):
 
     ax.set_xlabel("AUC Threshold (a)")
     ax.set_ylabel("MCRNI")
-    ax.set_title("MCRNI Robustness Curves")
+    ax.set_title("")
     ax.grid(True)
     ax.legend()
 
