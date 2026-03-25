@@ -28,7 +28,7 @@ def compute_mcrni_array(self, auc_grid):
     return mcrni_arr
 
 
-def init_mcrni_plot(mcrni_arr, auc_grid, label=None):
+def init_mcrni_plot(mcrni_arr, auc_grid, label=None, title = "MCRNI Robustness Curves"):
     """
     Initialize MCRNI plot using precomputed arrays.
 
@@ -49,7 +49,7 @@ def init_mcrni_plot(mcrni_arr, auc_grid, label=None):
 
     ax.set_xlabel("AUC Threshold (a)")
     ax.set_ylabel("MCRNI")
-    ax.set_title("")
+    ax.set_title(title)
     ax.grid(True)
     ax.legend()
 
