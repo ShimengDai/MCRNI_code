@@ -42,7 +42,7 @@ def run_grid_search(
     search = GridSearchCV(
         estimator=estimator,
         param_grid=param_grid,
-        scoring=cv_cfg.get("scoring", "average_precision"),
+        scoring=cv_cfg.get("scoring", "roc_auc"),  # "roc_auc" / "average_precision"
         cv=cv,
         refit=True,
         n_jobs=cv_cfg.get("n_jobs", -1),
