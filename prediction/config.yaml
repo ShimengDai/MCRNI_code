@@ -45,10 +45,10 @@ missing:
 models:
   logistic_regression:
     params:
-      #solver: "liblinear"
+      solver: "liblinear"
       max_iter: 2000
     param_grid:
-      solver: ["liblinear","lbfgs"]
+      
       penalty: ["l1", "l2", "elasticnet","none"]
       C: [0.001, 0.01, 0.1, 1.0, 10, 100]
 
