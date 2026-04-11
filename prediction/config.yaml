@@ -56,9 +56,9 @@ models:
       n_jobs: -1
       random_state: 57
     param_grid:
-      n_estimators: [200, 300, 500]
-      min_samples_leaf: [1, 2, 5]
-      max_depth: [1, 5, 10]
+      n_estimators: [200, 500]
+      min_samples_leaf: [2, 5]
+      max_depth: [5, 10]
 
   svm:
     params:
