@@ -28,7 +28,7 @@ data:
 # =========================
 
 feature:
-  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score"] # "math_t_score"; attendance
+  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score", "attendance"] # "math_t_score"; attendance
 
 # =========================
 # Missing data handling
