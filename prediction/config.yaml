@@ -28,7 +28,7 @@ data:
 # =========================
 
 feature:
-  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score"] #attendance
+  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity"] # "math_t_score"; attendance
 
 # =========================
 # Missing data handling
@@ -56,8 +56,8 @@ models:
       n_jobs: -1
       random_state: 57
     param_grid:
-      n_estimators: [200, 500]
-      min_samples_leaf: [2, 5]
+      n_estimators: [200, 300]
+      min_samples_leaf: [1, 5]
       max_depth: [5, 10]
 
   svm:
@@ -68,7 +68,7 @@ models:
       #random_state: 57
     param_grid:
       C: [0.01, 0.1, 1.0, 10]
-      gamma: [0.01, 0.001]
+      gamma: ["scale", "auto"]
 # =========================
 # Cross-validation
 # =========================
