@@ -28,7 +28,7 @@ data:
 # =========================
 
 feature:
-  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score", "attendance"]
+  exclude_cols: ["stem_cred", "School_ID", "AP", "college_enroll", "gpa", "stem_courses", "stem_gpa", "hard_stem_career", "soft_stem_career", "urbanicity", "math_t_score"]
 
 # =========================
 # Missing data handling
@@ -46,19 +46,19 @@ models:
   logistic_regression:
     params:
       solver: "liblinear"
-      max_iter: 2000
+      max_iter: 1000
     param_grid:
-      penalty: ["l1", "l2", "elasticnet","none"]
-      C: [0.001, 0.01, 0.1, 1.0, 10, 100]
+      penalty: ["l1", "l2"]
+      C: [0.001, 0.01, 0.1, 1.0]
 
   random_forest:
     params:
       n_jobs: -1
       random_state: 57
     param_grid:
-      n_estimators: [100, 200, 300, 400, 500]
+      n_estimators: [200, 300, 400, 500]
       min_samples_leaf: [1, 2, 5]
-      max_depth: [1, 5, 10, 15, 20, 25, 30]
+      max_depth: [1, 5, 10, 15]
 
   svm:
     params:
@@ -68,7 +68,7 @@ models:
       #random_state: 57
     param_grid:
       C: [0.01, 0.1, 1.0, 10, 100]
-      gamma: ["scale", "auto", 0.01, 0.001]
+      gamma: ["scale", 0.01, 0.001]
 # =========================
 # Cross-validation
 # =========================
