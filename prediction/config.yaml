@@ -56,9 +56,9 @@ models:
       n_jobs: -1
       random_state: 57
     param_grid:
-      n_estimators: [200, 300, 400, 500]
+      n_estimators: [200, 300, 500]
       min_samples_leaf: [1, 2, 5]
-      max_depth: [1, 5, 10, 15]
+      max_depth: [1, 5, 10]
 
   svm:
     params:
@@ -67,8 +67,8 @@ models:
       class_weight: "balanced"
       #random_state: 57
     param_grid:
-      C: [0.01, 0.1, 1.0, 10, 100]
-      gamma: ["scale", 0.01, 0.001]
+      C: [0.01, 0.1, 1.0, 10]
+      gamma: [0.01, 0.001]
 # =========================
 # Cross-validation
 # =========================
