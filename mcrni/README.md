@@ -1,4 +1,4 @@
-cd "/Users/shimengdai/Dropbox/Michigan State/Eighth semester/disseration/Chapter 3/mcrni"
+
 python main.py
 
 This repository provides Python code to compute MCRNI (Model Classification Rank-based Negative Index) for binary classification tasks.
