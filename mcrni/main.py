@@ -34,13 +34,13 @@ def main():
 
         model = MCRNI(y_true, y_scores)
 
-        # 先算 MCRNI（内部会确保 rank 已经算好）
+        # MCRNI
         mcrni = model.compute_mcrni_with_auc(auc_a)
 
-        # 再算标准分类指标（Accuracy/Precision/Recall/F1/ROC-AUC）
+        # Accuracy/Precision/Recall/F1/ROC-AUC
         metrics = model.compute_standard_metrics(threshold=cls_threshold)
 
-        # 组装“一行结果”（列名风格跟 save_metrics 一致）
+       
         row = {
             "urbanicity": area,
             "n": len(g),
